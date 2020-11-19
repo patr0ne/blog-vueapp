@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Hello Blog Vue
-    <router-view />
-  </div>
+	<div>
+		Hello Blog Vue
+		<router-view />
+	</div>
 </template>

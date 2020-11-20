@@ -9,7 +9,10 @@
 							>Need an account?</router-link
 						>
 					</p>
-					VALIDATION ERRORS
+					<blog-validation-errors
+						v-if="validationErrors"
+						:validation-errors="validationErrors"
+					/>
 					<form @submit.prevent="onSubmit">
 						<fieldset class="form-group">
 							<input
@@ -49,8 +52,13 @@
 </template>
 
 <script>
+import BlogValidationErrors from '@/components/ValidationErrors'
+
 export default {
 	name: 'BlogRegister',
+	components: {
+		BlogValidationErrors
+	},
 	data() {
 		return {
 			email: '',
@@ -61,6 +69,9 @@ export default {
 	computed: {
 		isSubmitting() {
 			return this.$store.state.auth.isSubmitting
+		},
+		validationErrors() {
+			return this.$store.state.auth.validationErrors
 		}
 	},
 	methods: {
@@ -73,8 +84,8 @@ export default {
 					password: this.password
 				})
 				.then(user => {
-                    console.log('succesfully register user', user)
-                    this.$router.push({name: 'home'})
+					console.log('succesfully register user', user)
+					this.$router.push({name: 'home'})
 				})
 		}
 	}
